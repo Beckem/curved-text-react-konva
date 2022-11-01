@@ -123,10 +123,10 @@ function App() {
             <div className="space-x-4 ml-auto flex items-center">
               <label>Rotate</label>
               <div className="flex flex-col items-center ">
-                <div>{Math.round(selectedItem.rotation)}</div>
+                <div>{(Math.round(selectedItem.rotation) + 360) % 360}</div>
                 <input
                   type="range"
-                  value={selectedItem.rotation}
+                  value={(Math.round(selectedItem.rotation) + 360) % 360}
                   min={0}
                   max={360}
                   onChange={(e) => {
@@ -184,6 +184,7 @@ function App() {
                   };
                   setTextCurveds(newTextCurves);
                 }}
+                value={selectedItem.textBaseline}
               >
                 <option value="middle">Middle</option>
                 <option value="top">Bottom</option>
