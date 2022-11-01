@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Stage, Layer, Path, TextPath } from "react-konva";
 
 function App() {
-  const [size, setSize] = useState(100);
+  const [diameterX, setDiameterX] = useState(100);
+  const [diameterY, setDiameterY] = useState(100);
   const [cx, setCx] = useState(150);
   const [cy, setCy] = useState(150);
   const [rotation, setRotation] = useState(0);
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [textBaseline, setTextBaseline] = useState("middle");
-  const path = `M 0 ${size} a ${size} ${size} 0 1 1 1 0`;
+  const path = `M 0 100 a ${diameterX} ${diameterY} 0 1 1 1 0`;
 
   return (
     <>
@@ -36,38 +37,70 @@ function App() {
               className="border w-20 p-1"
             />
           </div>
-          <div className="space-x-4 ml-auto">
-            <label>R</label>
-            <input
-              type="number"
-              value={rotation}
-              onChange={(e) => {
-                setRotation(e.target.value);
-              }}
-              className="border w-20 p-1"
-            />
+          <div className="space-x-4 ml-auto flex items-center">
+            <label>Diameter X</label>
+            <div className="flex flex-col items-center">
+              <div>{diameterX}</div>
+              <input
+                type="range"
+                value={diameterX}
+                min={1}
+                max={300}
+                onChange={(e) => {
+                  setDiameterX(e.target.value);
+                }}
+                className="border w-20 p-1"
+              />
+            </div>
           </div>
-          <div className="space-x-4 ml-auto">
-            <label>Size</label>
-            <input
-              type="number"
-              value={size}
-              onChange={(e) => {
-                setSize(e.target.value);
-              }}
-              className="border w-20 p-1"
-            />
+          <div className="space-x-4 ml-auto flex items-center">
+            <label>Diameter Y</label>
+            <div className="flex flex-col items-center ">
+              <div>{diameterY}</div>
+              <input
+                type="range"
+                value={diameterY}
+                min={1}
+                max={300}
+                onChange={(e) => {
+                  setDiameterY(e.target.value);
+                }}
+                className="border w-20 p-1"
+              />
+            </div>
           </div>
-          <div className="space-x-4 ml-auto">
+
+          <div className="space-x-4 ml-auto flex items-center">
+            <label>Rotate</label>
+            <div className="flex flex-col items-center ">
+              <div>{rotation}</div>
+              <input
+                type="range"
+                value={rotation}
+                min={0}
+                max={360}
+                onChange={(e) => {
+                  setRotation(e.target.value);
+                }}
+                className="border w-20 p-1"
+              />
+            </div>
+          </div>
+          <div className="space-x-4 ml-auto flex items-center">
             <label>Letter Spacing</label>
-            <input
-              type="number"
-              value={letterSpacing}
-              onChange={(e) => {
-                setLetterSpacing(e.target.value);
-              }}
-              className="border w-20 p-1"
-            />
+            <div className="flex flex-col items-center ">
+              <div>{letterSpacing}</div>
+              <input
+                type="range"
+                value={letterSpacing}
+                min={0}
+                max={360}
+                onChange={(e) => {
+                  setLetterSpacing(e.target.value);
+                }}
+                className="border w-20 p-1"
+              />
+            </div>
           </div>
           <div className="space-x-4 ml-auto">
             <label>Text Base</label>
@@ -76,25 +109,17 @@ function App() {
               className="w-20 p-1 border"
               onChange={(e) => setTextBaseline(e.target.value)}
             >
-              <option value="middle">middle</option>
-              <option value="bottom">bottom</option>
-              <option value="top">top</option>
+              <option value="middle">Middle</option>
+              <option value="bottom">Bottom</option>
+              <option value="top">Top</option>
             </select>
           </div>
-          {/* <input
-              type="number"
-              value={letterSpacing}
-              onChange={(e) => {
-                setLetterSpacing(e.target.value);
-              }}
-              className="border w-20 p-1"
-            /> */}
         </div>
       </div>
 
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Path fill="green" x={cx} y={cy} data={path} />
+          <Path fill="#666" x={cx} y={cy} data={path} />
           <TextPath
             x={cx}
             y={cy}
